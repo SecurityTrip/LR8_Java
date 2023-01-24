@@ -15,28 +15,46 @@ public class Main {
 
     public static void main(String[] args) throws InappropriateFunctionPointException {
 
-
+        test();
 
     }
 
     public static void test() {
         //
-        TabulatedFunction f = new LinkedListTabulatedFunction(-10.0, 10.0, 5);
+        TabulatedFunction f = null;
+        try {
+            f = new LinkedListTabulatedFunction(-10.0, 10.0, 5);
+        } catch (InappropriateFunctionPointException e) {
+            throw new RuntimeException(e);
+        }
         for (FunctionPoint p : f) {
             System.out.println(p);
         }
 
         //
         Function function = new Cos();
-        TabulatedFunction tf = TabulatedFunctions.tabulate(function, 0, Math.PI, 11);
+        TabulatedFunction tf = null;
+        try {
+            tf = TabulatedFunctions.tabulate(function, 0, Math.PI, 11);
+        } catch (InappropriateFunctionPointException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(tf.getClass());
 
         TabulatedFunctions.setTabulatedFunctionFactory(new LinkedListTabulatedFunction.LinkedListTabulatedFunctionFactory());
-        tf = TabulatedFunctions.tabulate(f, 0, Math.PI, 11);
+        try {
+            tf = TabulatedFunctions.tabulate(f, 0, Math.PI, 11);
+        } catch (InappropriateFunctionPointException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(tf.getClass());
 
         TabulatedFunctions.setTabulatedFunctionFactory(new ArrayTabulatedFunction.ArrayTabulatedFunctionFactory());
-        tf = TabulatedFunctions.tabulate(f, 0, Math.PI, 11);
+        try {
+            tf = TabulatedFunctions.tabulate(f, 0, Math.PI, 11);
+        } catch (InappropriateFunctionPointException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(tf.getClass());
 
         //

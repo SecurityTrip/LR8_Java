@@ -21,42 +21,33 @@ public class Main {
 
     public static void test() {
         //
-        TabulatedFunction f = null;
         try {
+            TabulatedFunction f = null;
             f = new LinkedListTabulatedFunction(-10.0, 10.0, 5);
-        } catch (InappropriateFunctionPointException e) {
-            throw new RuntimeException(e);
-        }
-        for (FunctionPoint p : f) {
-            System.out.println(p);
-        }
 
-        //
-        Function function = new Cos();
-        TabulatedFunction tf = null;
-        try {
+            for (FunctionPoint p : f) {
+                System.out.println(p);
+            }
+
+            //
+            Function function = new Cos();
+            TabulatedFunction tf = null;
             tf = TabulatedFunctions.tabulate(function, 0, Math.PI, 11);
-        } catch (InappropriateFunctionPointException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(tf.getClass());
 
-        TabulatedFunctions.setTabulatedFunctionFactory(new LinkedListTabulatedFunction.LinkedListTabulatedFunctionFactory());
-        try {
+            System.out.println(tf.getClass());
+
+            TabulatedFunctions.setTabulatedFunctionFactory(new LinkedListTabulatedFunction.LinkedListTabulatedFunctionFactory());
             tf = TabulatedFunctions.tabulate(f, 0, Math.PI, 11);
-        } catch (InappropriateFunctionPointException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(tf.getClass());
 
-        TabulatedFunctions.setTabulatedFunctionFactory(new ArrayTabulatedFunction.ArrayTabulatedFunctionFactory());
-        try {
+            System.out.println(tf.getClass());
+
+            TabulatedFunctions.setTabulatedFunctionFactory(new ArrayTabulatedFunction.ArrayTabulatedFunctionFactory());
             tf = TabulatedFunctions.tabulate(f, 0, Math.PI, 11);
-        } catch (InappropriateFunctionPointException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(tf.getClass());
 
+            System.out.println(tf.getClass());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         //
         TabulatedFunction func = TabulatedFunctions.createTabulatedFunction(
                 ArrayTabulatedFunction.class,
